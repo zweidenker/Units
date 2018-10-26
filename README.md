@@ -16,7 +16,7 @@ A simple package for units
 
 (15 units: #mile) / (1 units: #second). "15 miles per second"
 
-15mi/1s. "15s0 miles"
+15mi/1 s. "15 miles per second"
 
 3m * 3m. "9 square metres"
 
