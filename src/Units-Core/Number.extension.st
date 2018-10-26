@@ -228,6 +228,12 @@ Number >> grams [
 ]
 
 { #category : #'*Units-Core' }
+Number >> h [
+
+	^ self units: #hour
+]
+
+{ #category : #'*Units-Core' }
 Number >> ha [
 
 	^ self units: #hectare
