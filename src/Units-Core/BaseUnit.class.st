@@ -177,7 +177,7 @@ BaseUnit >> consistentWith: unit [
 
 { #category : #consistency }
 BaseUnit >> consistentWithBaseUnit: unit [
-	^self == unit
+	^self = unit
 ]
 
 { #category : #consistency }
