@@ -302,8 +302,7 @@ Unit class >> gigavolt [
 
 { #category : #'mass units' }
 Unit class >> gram [
-
-	^NamedUnit named: 'gram'
+	^ BaseUnit gram
 ]
 
 { #category : #'mass units' }
@@ -410,8 +409,7 @@ Unit class >> kg [
 
 { #category : #'mass units' }
 Unit class >> kilogram [
-
-	^ BaseUnit kilogram
+	^ self gram prefixedBy: 'kilo'
 ]
 
 { #category : #'mass units' }
@@ -890,7 +888,7 @@ Unit class >> volt [
 { #category : #'power units' }
 Unit class >> volts [
 
-	^ BaseUnit volts
+	^ self volt
 ]
 
 { #category : #'power units' }

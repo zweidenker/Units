@@ -43,12 +43,6 @@ BaseUnit class >> ampere [
 	^self withSingularName: 'ampere'
 ]
 
-{ #category : #'base units' }
-BaseUnit class >> amperes [
-
-	^self ampere
-]
-
 { #category : #example }
 BaseUnit class >> basePair [
 
@@ -79,8 +73,14 @@ BaseUnit class >> donuts [
 	^ self donut
 ]
 
+{ #category : #'base units' }
+BaseUnit class >> gram [
+	^ self withSingularName: 'gram'
+]
+
 { #category : #initialization }
 BaseUnit class >> initializeClass [
+	<script>
 	"BaseUnit initializeClass."
 	"Do not rename this to #initialize."
 	PrintAbbreviated := false.  "may as well do it here ..."
@@ -88,7 +88,7 @@ BaseUnit class >> initializeClass [
 	SIUnitsByAbbreviation := Dictionary new.
 	SIUnitsByPluralName := Dictionary new.
 	self
-		addUnit: 'kilogram' plural: 'kilograms' abbreviation: 'kg';
+		addUnit: 'gram' plural: 'grams' abbreviation: 'g';
 		addUnit: 'metre' plural: 'metres' abbreviation: 'm';
 		addUnit: 'second' plural: 'seconds' abbreviation: 's';
 		addUnit: 'candela' plural: 'candela' abbreviation: 'cd';
@@ -108,39 +108,9 @@ BaseUnit class >> kelvin [
 ]
 
 { #category : #'base units' }
-BaseUnit class >> kilogram [
-
-	^self withSingularName: 'kilogram'
-]
-
-{ #category : #'base units' }
-BaseUnit class >> kilograms [
-
-	^ self kilogram
-]
-
-{ #category : #'base units' }
-BaseUnit class >> meter [
-
-	^self metre
-]
-
-{ #category : #'base units' }
-BaseUnit class >> meters [
-
-	^self metre
-]
-
-{ #category : #'base units' }
 BaseUnit class >> metre [
 
 	^self withSingularName: 'metre'
-]
-
-{ #category : #'base units' }
-BaseUnit class >> metres [
-
-	^ self metre
 ]
 
 { #category : #'base units' }
@@ -150,33 +120,15 @@ BaseUnit class >> mole [
 ]
 
 { #category : #'base units' }
-BaseUnit class >> moles [
-
-	^self mole
-]
-
-{ #category : #'base units' }
 BaseUnit class >> second [
 
 	^self withSingularName: 'second'
 ]
 
 { #category : #'base units' }
-BaseUnit class >> seconds [
-
-	^ self second
-]
-
-{ #category : #'base units' }
 BaseUnit class >> volt [
 
 	^self withSingularName: 'volt'
-]
-
-{ #category : #'base units' }
-BaseUnit class >> volts [
-
-	^self volt
 ]
 
 { #category : #accessing }
