@@ -152,6 +152,18 @@ BaseUnit class >> withSingularName: unitName ifAbsent: exceptionBlock [
 		ifAbsent: exceptionBlock
 ]
 
+{ #category : #comparing }
+BaseUnit >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ pluralName = anObject pluralName
+		and: [ abbreviation = anObject abbreviation and: [ name = anObject name ] ]
+]
+
 { #category : #conversion }
 BaseUnit >> baseUnits [
 	"This is already a base unit."
@@ -176,6 +188,13 @@ BaseUnit >> consistentWithComplexUnit: complexUnit [
 { #category : #conversion }
 BaseUnit >> conversionFactor [
 	^1.  "by definition"
+]
+
+{ #category : #comparing }
+BaseUnit >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ (pluralName hash bitXor: (abbreviation hash bitXor: name hash)) hashMultiply
 ]
 
 { #category : #predicates }
