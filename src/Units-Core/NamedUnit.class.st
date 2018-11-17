@@ -201,7 +201,7 @@ NamedUnit class >> initializeOtherUnits [
 		abbreviation: 'deg'
 		name: 'arcdegree'
 		pluralName: 'arcdegrees'
-		value: (1 degreesToRadians units: Unit radian).
+		value: (1 degreesToRadians / Float pi units: Unit radian).
 ]
 
 { #category : #initialization }
