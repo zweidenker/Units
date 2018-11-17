@@ -55,6 +55,14 @@ UnitsTest >> testCreateAdditionalUnit [
 ]
 
 { #category : #testing }
+UnitsTest >> testDegreesToRadians [
+	self assert: (90 arcdegree convertTo: 1 radian) value closeTo: 0.5.
+	self assert: (180 arcdegree convertTo: 1 radian) value closeTo: 1.
+	self assert: (270 arcdegree convertTo: 1 radian) value closeTo: 1.5.
+	self assert: (360 arcdegree convertTo: 1 radian) value closeTo: 2.
+]
+
+{ #category : #testing }
 UnitsTest >> testDivide [
 	"You can divide unit values."
 	| u |
@@ -83,6 +91,14 @@ UnitsTest >> testNewton [
 	u :=  3 units: #newton.
 	self assert: (u printString = '3 newtons').
 
+]
+
+{ #category : #testing }
+UnitsTest >> testRadiansToDegrees [
+	self assert: ((0.5 radian) convertTo: 1 arcdegree) value closeTo: 90.
+	self assert: ((1 radian) convertTo: 1 arcdegree) value closeTo: 180.
+	self assert: ((1.5 radians) convertTo: 1 arcdegree) value closeTo: 270.
+	self assert: ((2 radians) convertTo: 1 arcdegree) value closeTo: 360.
 ]
 
 { #category : #testing }
