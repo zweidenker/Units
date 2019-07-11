@@ -318,6 +318,12 @@ Unit class >> gramsPerMole [
 	^ Unit gram / Unit mole
 ]
 
+{ #category : #'time units' }
+Unit class >> h [
+
+	^ self hour
+]
+
 { #category : #'area units' }
 Unit class >> ha [
 
