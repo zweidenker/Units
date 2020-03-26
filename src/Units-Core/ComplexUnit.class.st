@@ -13,6 +13,8 @@ Class {
 
 { #category : #'instance creation' }
 ComplexUnit class >> units: units exponents: exponents [
+	"if we have just one exponent of size one, the unit itself is enough"
+	(exponents size = 1 and: [exponents first = 1]) ifTrue: [ ^units first ].
 	units
 		detect: [:each | each isBaseUnit not]
 		ifNone: [

@@ -89,3 +89,10 @@ UnitsTest >> testNewton [
 UnitsTest >> testReduce [
 	self assert: 5 km / 5000 m equals: 1
 ]
+
+{ #category : #testing }
+UnitsTest >> testSqrt [
+	"if we take the root of a squared unit, we need to make sure to reduce the 
+	unit and not use a ComplexUnit"
+	self assert: (2 units: Unit km squared) sqrt unit class equals: PrefixedUnit
+]
