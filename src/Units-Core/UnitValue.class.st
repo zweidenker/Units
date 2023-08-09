@@ -10,9 +10,6 @@ Class {
 		'unit',
 		'value'
 	],
-	#classVars : [
-		'InconsistentUnitsSignal'
-	],
 	#category : #'Units-Core'
 }
 

@@ -377,7 +377,7 @@ Unit class >> inches [
 	^ self inch
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 Unit class >> initialize [
 	"Unit initialize."
 	"This is the master 'initialize' method.  It calls the #initializeClass methods of the
