@@ -4,88 +4,89 @@ See class SIPrefix for details.
 
 "
 Class {
-	#name : #PrefixedUnit,
-	#superclass : #Unit,
+	#name : 'PrefixedUnit',
+	#superclass : 'Unit',
 	#instVars : [
 		'prefix',
 		'unit'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrefixedUnit class >> prefix: prefix unit: unit [
 	^self new prefix: prefix unit: unit
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PrefixedUnit class >> prefixName: prefixName unit: unit [
 	| prefix |
 	prefix := SIPrefix named: prefixName.
 	^self prefix: prefix unit: unit
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PrefixedUnit >> = anotherUnit [
 	self class == anotherUnit class ifFalse: [^false].
 	^prefix = anotherUnit prefix and: [unit = anotherUnit unit]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PrefixedUnit >> baseUnits [
 	^unit baseUnits
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 PrefixedUnit >> consistentWith: anotherUnit [
 	"Short-circuit the double dispatching; just compare the actual unit."
 	^anotherUnit consistentWith: unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 PrefixedUnit >> consistentWithAnything: anotherUnit [
 	^unit consistentWith: anotherUnit
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PrefixedUnit >> conversionFactor [
 	^prefix scalingFactor * unit conversionFactor
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PrefixedUnit >> hash [
 	^prefix hash bitXor: unit hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrefixedUnit >> prefix [
 	^prefix
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PrefixedUnit >> prefix: myPrefix unit: myUnit [
 	prefix := myPrefix.
 	unit := myUnit
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PrefixedUnit >> prefixedBy: prefixName [
 	^self error: 'This unit already has a prefix.'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PrefixedUnit >> printAbbreviationOn: stream [
 	stream nextPutAll: prefix abbreviation.
 	unit printAbbreviationOn: stream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PrefixedUnit >> printFullNameOn: stream pluralized: pluralized [
 	stream nextPutAll: prefix name.
 	unit printFullNameOn: stream pluralized: pluralized
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PrefixedUnit >> unit [
 	^unit
 ]

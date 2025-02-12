@@ -4,8 +4,8 @@ Examples: milli, micro, kilo, etc.
 
 "
 Class {
-	#name : #SIPrefix,
-	#superclass : #Object,
+	#name : 'SIPrefix',
+	#superclass : 'Object',
 	#instVars : [
 		'abbreviation',
 		'name',
@@ -15,10 +15,11 @@ Class {
 		'SIPrefixesByAbbreviation',
 		'SIPrefixesByName'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SIPrefix class >> abbreviation: abbreviation name: prefixName scalingFactor: scalingFactor [
 	| prefix |
 	prefix := self new
@@ -30,7 +31,7 @@ SIPrefix class >> abbreviation: abbreviation name: prefixName scalingFactor: sca
 	^prefix
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SIPrefix class >> initializeClass [
 	"SIPrefix initializeClass."
 	"Do not rename this to #initialize."
@@ -58,46 +59,46 @@ SIPrefix class >> initializeClass [
 	self abbreviation: 'Y' name: 'yotta' scalingFactor: (10 raisedTo: 24)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SIPrefix class >> named: prefixName [
 	^SIPrefixesByName at: prefixName
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SIPrefix class >> prefixAbbreviationsDo: block [
 	"Evaluate 'block' once with each prefix abbreviation, in no particular order."
 	SIPrefixesByAbbreviation keysDo: block
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SIPrefix class >> prefixStringsDo: block [
 	"Evaluate 'block' once with each prefix string, in no particular order."
 	SIPrefixesByName keysDo: block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SIPrefix class >> withAbbreviation: abbreviation [
 	^SIPrefixesByAbbreviation at: abbreviation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SIPrefix >> abbreviation [
 	^abbreviation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SIPrefix >> abbreviation: myAbbreviation name: myName scalingFactor: myScalingFactor [
 	abbreviation := myAbbreviation.
 	name := myName.
 	scalingFactor := myScalingFactor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SIPrefix >> name [
 	^name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SIPrefix >> printOn: stream [
 	super printOn: stream.
 	stream
@@ -106,12 +107,12 @@ SIPrefix >> printOn: stream [
 		nextPut: $]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SIPrefix >> scalingFactor [
 	^scalingFactor
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SIPrefix >> storeOn: aStream [
 	"Store the code to lookup the receiver instead of for a new instance."
 	

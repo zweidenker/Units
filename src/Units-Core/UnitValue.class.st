@@ -4,26 +4,27 @@ See the methods here for more information.
 
 "
 Class {
-	#name : #UnitValue,
-	#superclass : #Magnitude,
+	#name : 'UnitValue',
+	#superclass : 'Magnitude',
 	#instVars : [
 		'unit',
 		'value'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UnitValue class >> one [
 	^1
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UnitValue class >> unit: unit value: value [
 	^self basicNew unit: unit value: value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitValue class >> unitFor: object [
 	"Some methods in UnitValue (and Number>>#units:) can take either
 	 a Unit object, or a symbol representing a unit name, or a UnitValue object.  
@@ -35,73 +36,73 @@ UnitValue class >> unitFor: object [
 		ifFalse: [object unitPart]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UnitValue class >> zero [
 	^0
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> % number [
 	self shouldNotImplement
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> * number [
 	^number multiplyByUnit: self
 ]
 
-{ #category : #mathematical }
+{ #category : 'mathematical' }
 UnitValue >> ** exponent [
 	^self raisedTo: exponent
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> + number [
 	^number addToUnit: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> - number [
 	^number subtractFromUnit: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> / number [
 	^number divideIntoUnit: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 UnitValue >> < number [
 	^number lessFromUnit: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 UnitValue >> = number [
 	^number equalFromUnit: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> @ anObject [
 	"Answer a new point with x being the receiver and y anObject."
 	
 	^Point x: self y: anObject
 ]
 
-{ #category : #coercing }
+{ #category : 'coercing' }
 UnitValue >> adaptToInteger: rcvr andSend: selector [
 	"handle coercion for mixed arithmetic
 	 uses the method already present for DD"
 	^(self coerce: rcvr) perform: selector with: self
 ]
 
-{ #category : #coercing }
+{ #category : 'coercing' }
 UnitValue >> adaptToNumber: rcvr andSend: selector [
 	"handle coercion for mixed arithmetic
 	 uses the method already present for DD"
 	^(self coerce: rcvr) perform: selector with: self
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> addToUnit: unitValue [
 	| sum |
 	^(self consistentWith: unitValue)
@@ -112,14 +113,14 @@ UnitValue >> addToUnit: unitValue [
 		ifFalse: [unitValue inconsistentUnits: self selector: #+]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> as [
 	"Answer a delegate on the receiver #as: to handle the next message."
 	
 	^MessageDelegate on: [:m | self as: m selector]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> as: anotherUnit [
 	"Convert the receiver to have the same units as 'anotherUnit'.  Apply any appropriate
 	 scaling factors.  Gives an error if the receiver is not consistent with 'anotherUnit'."
@@ -127,32 +128,32 @@ UnitValue >> as: anotherUnit [
 	^self convertTo: anotherUnit
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> baseUnits [
 	"Answer the receiver reduced to base units only."
 	^self convertTo: unit baseUnits
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> ceiling [
 	^self class
 		unit: unit
 		value: value ceiling
 ]
 
-{ #category : #coercing }
+{ #category : 'coercing' }
 UnitValue >> coerce: number [
 	^self class
 		unit: CompoundUnit null
 		value: number
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 UnitValue >> consistentWith: anotherUnit [
 	^unit consistentWith: anotherUnit unitPart
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> convertTo: anotherUnit [
 	"Convert the receiver to have the same units as 'anotherUnit'.  Apply any appropriate
 	 scaling factors.  Gives an error if the receiver is not consistent with 'anotherUnit'."
@@ -163,7 +164,7 @@ UnitValue >> convertTo: anotherUnit [
 		ifFalse: [self inconsistentUnits: u selector: #convertTo:]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 UnitValue >> cssString [
 	"CSS is picky about units directly following the value."
 	
@@ -174,7 +175,7 @@ UnitValue >> cssString [
 	^str contents
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> divideIntoUnit: unitValue [
 	"Let the VM check for division by zero."
 	^(self class
@@ -183,7 +184,7 @@ UnitValue >> divideIntoUnit: unitValue [
 			reduced
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> equalFromUnit: unitValue [
 	"Is 'unitValue' equal in magnitude to the receiver?"
 	| converted |
@@ -195,7 +196,7 @@ UnitValue >> equalFromUnit: unitValue [
 		ifFalse: [false]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> factor: unitValue [
 	"Factor with respect to another Unit or UnitValue."
 	| newUnit |
@@ -203,19 +204,19 @@ UnitValue >> factor: unitValue [
 	^self convertTo: newUnit
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> floor [
 	^self class
 		unit: unit
 		value: value floor
 ]
 
-{ #category : #coercing }
+{ #category : 'coercing' }
 UnitValue >> generality [
 	^46
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 UnitValue >> hash [
 	"Answer a SmallInteger whose value is related to the receiver's identity.
 	May be overridden, and should be overridden in any classes that define = "
@@ -223,19 +224,19 @@ UnitValue >> hash [
 	^self unit hash bitXor: self value hash
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 UnitValue >> inconsistentUnits: argument selector: selector [
 	self error:
 		'Inconsistent units for #', selector, ' between ',
 			self printString, ' and ', argument printString
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 UnitValue >> isZero [
 	^unit isZeroAsValue: value
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> lessFromUnit: unitValue [
 	"Does 'unitValue' have a smaller magnitude than us?"
 	| converted |
@@ -246,26 +247,26 @@ UnitValue >> lessFromUnit: unitValue [
 		ifFalse: [unitValue inconsistentUnits: self selector: #<]
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> multiplyByUnit: unitValue [
 	^(self class
 		unit: (unit multipliedBy: unitValue unit)
 		value: unitValue value * value) reduced
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 UnitValue >> negated [
 	^self class
 		unit: unit
 		value: value negated
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 UnitValue >> negative [
 	^value negative
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 UnitValue >> printAbbreviatedOn: stream [
 	"Print the receiver in abbreviated form."
 	
@@ -274,7 +275,7 @@ UnitValue >> printAbbreviatedOn: stream [
 	unit printAbbreviationOn: stream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 UnitValue >> printOn: stream [
 	value printOn: stream.
 	stream space.
@@ -285,7 +286,7 @@ UnitValue >> printOn: stream [
 					pluralized: value ~= 1]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 UnitValue >> printStringAbbreviated [
 	"Answer the print string in abbreviated form."
 	
@@ -295,14 +296,14 @@ UnitValue >> printStringAbbreviated [
 	^str contents
 ]
 
-{ #category : #mathematical }
+{ #category : 'mathematical' }
 UnitValue >> raisedTo: exponent [
 	^self class
 		unit: (unit raisedTo: exponent)
 		value: (value raisedTo: exponent)
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitValue >> reduced [
 	"If the receiver's units have 'vanished' (e.g., by dividing 2 seconds by 3 seconds),
 	 answer the remaining scalar part of the receiver.  Otherwise, answer the receiver
@@ -316,52 +317,52 @@ UnitValue >> reduced [
 				ifFalse: [ self ] ]
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> roundTo: number [
 	^self class
 		unit: unit
 		value: (value roundTo: number)
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> roundUpTo: number [
 	^self class
 		unit: unit
 		value: (value roundUpTo: number)
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> rounded [
 	^self class
 		unit: unit
 		value: value rounded
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 UnitValue >> setUnit: aUnit [
 	"Set the unit."
 	
 	unit := aUnit
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 UnitValue >> setValue: newValue [
 	value := newValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 UnitValue >> sign [
 	^value sign
 ]
 
-{ #category : #mathematical }
+{ #category : 'mathematical' }
 UnitValue >> sqrt [
 	^self class
 		unit: (unit raisedTo: 1/2)
 		value: value sqrt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitValue >> storeOn: aStream [
 	"Store the code to lookup the receiver instead of for a new instance."
 	
@@ -376,7 +377,7 @@ UnitValue >> storeOn: aStream [
 		ifFalse: [super storeOn: aStream]
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 UnitValue >> subtractFromUnit: unitValue [
 	"Subtract the receiver from the unitValue."
 	
@@ -389,43 +390,43 @@ UnitValue >> subtractFromUnit: unitValue [
 		ifFalse: [unitValue inconsistentUnits: self selector: #-]
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> truncateTo: number [
 	^self class
 		unit: unit
 		value: (value truncateTo: number)
 ]
 
-{ #category : #rounding }
+{ #category : 'rounding' }
 UnitValue >> truncated [
 	^self class
 		unit: unit
 		value: value truncated
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 UnitValue >> uncheckedConvertTo: anotherUnit [
 	^anotherUnit unitPart uncheckedConvertFrom: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitValue >> unit [
 	^unit
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UnitValue >> unit: myUnit value: myValue [
 	unit := myUnit.
 	value := myValue
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 UnitValue >> unitPart [
 	"Answer the unit part of the receiver."
 	^unit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitValue >> value [
 	"A special interpretation of #value to answer the scalar part of the unit."
 	^value

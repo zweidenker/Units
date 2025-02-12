@@ -15,16 +15,17 @@ Examples of things that are not CompoundUnits:
 
 "
 Class {
-	#name : #CompoundUnit,
-	#superclass : #Unit,
+	#name : 'CompoundUnit',
+	#superclass : 'Unit',
 	#instVars : [
 		'units',
 		'exponents'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CompoundUnit class >> null [
 	"A special CompoundUnit used to coerce numbers into the Unit domain."
 	^self
@@ -32,19 +33,19 @@ CompoundUnit class >> null [
 		exponents: #()
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 CompoundUnit class >> sortBlock [
 	^[:left :right | left abbreviation < right abbreviation]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CompoundUnit class >> units: units exponents: exponents [
 	^self new
 		units: units
 		exponents: exponents
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 CompoundUnit >> = anotherUnit [
 	"This is not the same as #consistentWith:, which checks for isomorphism.  This method
 	 just checks to see if the receiver and argument have the same units and exponents."
@@ -53,74 +54,74 @@ CompoundUnit >> = anotherUnit [
 		and: [exponents = anotherUnit snarfExponents]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 CompoundUnit >> baseUnits [
 	"The receiver already consists entirely of base units."
 	^self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 CompoundUnit >> consistentWith: unit [
 	^unit consistentWithCompoundUnit: self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 CompoundUnit >> consistentWithBaseUnit: baseUnit [
 	"Always false, because a CompoundUnit must always have a nontrivial set of units."
 	^false
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 CompoundUnit >> consistentWithComplexUnit: complexUnit [
 	^self consistentWith: complexUnit baseUnits
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 CompoundUnit >> consistentWithCompoundUnit: compoundUnit [
 	"We can check the unit and exponent arrays for equality directly, since the units are assumed to be sorted alphabetically."
 	^units = compoundUnit snarfUnits
 		and: [exponents = compoundUnit snarfExponents]
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 CompoundUnit >> consistentWithModifiedUnit: modifiedUnit [
 	"Same as #consistentWithBaseUnit:."
 	^false
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 CompoundUnit >> conversionFactor [
 	^1
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 CompoundUnit >> hash [
 	^units hash bitXor: exponents hash
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 CompoundUnit >> includesNegativeExponents [
 	^exponents anySatisfy: [:each | each < 0]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 CompoundUnit >> includesPositiveExponents [
 	^exponents anySatisfy: [:each | each > 0]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 CompoundUnit >> inverse [
 	^self class
 		units: units
 		exponents: (exponents collect: [:each | each negated])
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 CompoundUnit >> isNull [
 	^units isEmpty
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 CompoundUnit >> negativeExponentsCount [
 	| count |
 	count := 0.
@@ -128,7 +129,7 @@ CompoundUnit >> negativeExponentsCount [
 	^count
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 CompoundUnit >> positiveExponentsCount [
 	| count |
 	count := 0.
@@ -136,12 +137,12 @@ CompoundUnit >> positiveExponentsCount [
 	^count
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 CompoundUnit >> prefixedBy: prefixName [
 	^self error: 'You cannot attach prefixes to compound units.'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 CompoundUnit >> printAbbreviationOn: stream [
 	| first any count |
 	first := true.
@@ -169,7 +170,7 @@ CompoundUnit >> printAbbreviationOn: stream [
 		count > 1 ifTrue: [stream nextPut: $)]]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 CompoundUnit >> printFullNameOn: stream pluralized: pluralized [
 	"Print the full name of this unit, pluralized if 'pluralized' is true."
 	| positive negative |
@@ -189,7 +190,7 @@ CompoundUnit >> printFullNameOn: stream pluralized: pluralized [
 			pluralized: false]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 CompoundUnit >> printUnitsWhereExponent: block on: stream pluralized: pluralized [
 	| power first count index thisPlural |
 	first := true.
@@ -211,14 +212,14 @@ CompoundUnit >> printUnitsWhereExponent: block on: stream pluralized: pluralized
 					print: power]]]
 ]
 
-{ #category : #'unit arithmetic' }
+{ #category : 'unit arithmetic' }
 CompoundUnit >> raisedTo: exponent [
 	^self class
 		units: units
 		exponents: (exponents collect: [:each | each * exponent])
 ]
 
-{ #category : #'unit arithmetic' }
+{ #category : 'unit arithmetic' }
 CompoundUnit >> reciprocal [
 	"Just make a new unit of the same class, with all the exponents negated."
 	^self class
@@ -226,23 +227,23 @@ CompoundUnit >> reciprocal [
 		exponents: (exponents collect: [:each | each negated])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 CompoundUnit >> snarfExponents [
 	^exponents
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 CompoundUnit >> snarfUnits [
 	^units
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CompoundUnit >> units: myUnits exponents: myExponents [
 	units := myUnits.
 	exponents := myExponents
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 CompoundUnit >> unitsAndExponentsDo: block [
 	units with: exponents do: block
 ]

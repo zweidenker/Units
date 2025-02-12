@@ -4,15 +4,16 @@ e.g., Celsius to Fahrenheit.
 
 "
 Class {
-	#name : #TemperatureUnit,
-	#superclass : #DerivedUnit,
+	#name : 'TemperatureUnit',
+	#superclass : 'DerivedUnit',
 	#instVars : [
 		'additiveFactor'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 TemperatureUnit class >> abbreviation: abbreviation
 name: unitName
 pluralName: pluralName
@@ -28,22 +29,22 @@ additiveFactor: additiveFactor [
 	^unit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TemperatureUnit >> additiveFactor [
 	^additiveFactor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TemperatureUnit >> additiveFactor: myAdditiveFactor [
 	additiveFactor := myAdditiveFactor
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TemperatureUnit >> isZeroAsValue: value [
 	
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 TemperatureUnit >> uncheckedConvertFrom: anotherUnitValue [
 	| kelvin newValue |
 	^anotherUnitValue unit isBaseUnit

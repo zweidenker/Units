@@ -4,17 +4,18 @@ a general linear transformation for basic arithmetic operations.
 
 "
 Class {
-	#name : #TemperatureBaseUnit,
-	#superclass : #BaseUnit,
-	#category : #'Units-Core'
+	#name : 'TemperatureBaseUnit',
+	#superclass : 'BaseUnit',
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TemperatureBaseUnit >> isZeroAsValue: value [
 	^false
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 TemperatureBaseUnit >> uncheckedConvertFrom: anotherUnitValue [
 	| newValue |
 	newValue :=

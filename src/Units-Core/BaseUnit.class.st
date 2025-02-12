@@ -14,17 +14,18 @@ Two 'extra' base units are included to demonstrate how to extend the system:
 
 "
 Class {
-	#name : #BaseUnit,
-	#superclass : #NamedUnit,
+	#name : 'BaseUnit',
+	#superclass : 'NamedUnit',
 	#classVars : [
 		'SIUnitsByAbbreviation',
 		'SIUnitsByName',
 		'SIUnitsByPluralName'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BaseUnit class >> addUnit: unitName plural: pluralName abbreviation: abbreviation [
 	| unit |
 	unit := self new
@@ -37,49 +38,49 @@ BaseUnit class >> addUnit: unitName plural: pluralName abbreviation: abbreviatio
 	^unit
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> ampere [
 
 	^self withSingularName: 'ampere'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> amperes [
 
 	^self ampere
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BaseUnit class >> basePair [
 
 	^self withPluralName: 'base pair'
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BaseUnit class >> basePairs [
 
 	^ self withPluralName: 'base pairs'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> candela [
 
 	^self withSingularName: 'candela'
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BaseUnit class >> donut [
 
 	^ self withSingularName: 'donut'
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BaseUnit class >> donuts [
 
 	^ self donut
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BaseUnit class >> initializeClass [
 	"BaseUnit initializeClass."
 	"Do not rename this to #initialize."
@@ -101,137 +102,137 @@ BaseUnit class >> initializeClass [
 		addUnit: 'volt' plural: 'volts' abbreviation: 'V'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> kelvin [
 
 	^self withSingularName: 'kelvin'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> kilogram [
 
 	^self withSingularName: 'kilogram'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> kilograms [
 
 	^ self kilogram
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> meter [
 
 	^self metre
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> meters [
 
 	^self metre
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> metre [
 
 	^self withSingularName: 'metre'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> metres [
 
 	^ self metre
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> mole [
 
 	^self withSingularName: 'mole'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> moles [
 
 	^self mole
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> second [
 
 	^self withSingularName: 'second'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> seconds [
 
 	^ self second
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> volt [
 
 	^self withSingularName: 'volt'
 ]
 
-{ #category : #'base units' }
+{ #category : 'base units' }
 BaseUnit class >> volts [
 
 	^self volt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaseUnit class >> withAbbreviation: abbreviation ifAbsent: exceptionBlock [
 	^SIUnitsByAbbreviation
 		at: abbreviation
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaseUnit class >> withPluralName: unitName ifAbsent: exceptionBlock [
 	^SIUnitsByPluralName
 		at: unitName
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaseUnit class >> withSingularName: unitName ifAbsent: exceptionBlock [
 	^SIUnitsByName
 		at: unitName
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 BaseUnit >> baseUnits [
 	"This is already a base unit."
 	^self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 BaseUnit >> consistentWith: unit [
 	^unit consistentWithBaseUnit: self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 BaseUnit >> consistentWithBaseUnit: unit [
 	^self == unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 BaseUnit >> consistentWithComplexUnit: complexUnit [
 	^self consistentWith: complexUnit baseUnits
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 BaseUnit >> conversionFactor [
 	^1.  "by definition"
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 BaseUnit >> isBaseUnit [
 	^true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BaseUnit >> storeOn: aStream [
 	"Store the code to lookup the receiver instead of for a new instance."
 	

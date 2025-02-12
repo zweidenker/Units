@@ -10,94 +10,95 @@ can now become:
 
 "
 Class {
-	#name : #ModifiedUnit,
-	#superclass : #Unit,
+	#name : 'ModifiedUnit',
+	#superclass : 'Unit',
 	#instVars : [
 		'baseUnit',
 		'modification'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ModifiedUnit class >> baseUnit: baseUnit modification: modification [
 	^self new
 		baseUnit: baseUnit
 		modification: modification
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ModifiedUnit >> = anotherUnit [
 	self class = anotherUnit class ifFalse: [^false].
 	modification = anotherUnit modification ifFalse: [^false].
 	^baseUnit = anotherUnit baseUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ModifiedUnit >> baseUnit [
 	^baseUnit
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ModifiedUnit >> baseUnit: myBaseUnit modification: myModification [
 	baseUnit := myBaseUnit.
 	modification := myModification
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ModifiedUnit >> baseUnits [
 	^self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ModifiedUnit >> consistentWith: anotherUnit [
 	^anotherUnit consistentWithModifiedUnit: self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ModifiedUnit >> consistentWithBaseUnit: anotherBaseUnit [
 	^false
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ModifiedUnit >> consistentWithComplexUnit: complexUnit [
 	^self consistentWith: complexUnit baseUnits
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ModifiedUnit >> consistentWithCompoundUnit: compoundUnit [
 	^false
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ModifiedUnit >> consistentWithModifiedUnit: modifiedUnit [
 	self class == modifiedUnit class ifFalse: [^false].
 	^baseUnit = modifiedUnit baseUnit
 		and: [modification = modifiedUnit modification]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ModifiedUnit >> conversionFactor [
 	^baseUnit conversionFactor
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 ModifiedUnit >> hash [
 	^modification hash bitXor: baseUnit hash
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 ModifiedUnit >> isBaseUnit [
 	"ModifiedUnits are effectively new base units..."
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ModifiedUnit >> modification [
 	^modification
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ModifiedUnit >> printAbbreviationOn: stream [
 	baseUnit printAbbreviationOn: stream.
 	stream nextPut: $(.
@@ -107,7 +108,7 @@ ModifiedUnit >> printAbbreviationOn: stream [
 	stream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ModifiedUnit >> printFullNameOn: stream pluralized: pluralized [
 	baseUnit printFullNameOn: stream pluralized: pluralized.
 	stream nextPutAll: ' (of '.

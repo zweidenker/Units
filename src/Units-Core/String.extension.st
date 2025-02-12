@@ -1,13 +1,13 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Units-Core' }
+{ #category : '*Units-Core' }
 String >> asUnit [
 	"Answer the receiver as a unit."
 	
 	^UnitValue unitFor: self asSymbol
 ]
 
-{ #category : #'*Units-Core' }
+{ #category : '*Units-Core' }
 String >> asUnitValue [
 	"Answer the receiver as a unit value."
 	

@@ -7,15 +7,16 @@ Note that the ""left side"" is always magnitude 1, which corresponds to 1 unit o
 
 "
 Class {
-	#name : #DerivedUnit,
-	#superclass : #NamedUnit,
+	#name : 'DerivedUnit',
+	#superclass : 'NamedUnit',
 	#instVars : [
 		'unitValue'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DerivedUnit class >> abbreviation: abbreviation name: unitName pluralName: pluralName value: unitValue [
 	| unit |
 	unit := super
@@ -26,48 +27,48 @@ DerivedUnit class >> abbreviation: abbreviation name: unitName pluralName: plura
 	^unit
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 DerivedUnit >> baseUnits [
 	^unitValue unit baseUnits
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 DerivedUnit >> consistentWith: unit [
 	"Short-circuit the double dispatching here."
 	^unitValue unitPart consistentWith: unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 DerivedUnit >> consistentWithBaseUnit: baseUnit [
 	^baseUnit consistentWith: self unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 DerivedUnit >> consistentWithComplexUnit: complexUnit [
 	^complexUnit consistentWith: self unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 DerivedUnit >> consistentWithCompoundUnit: compoundUnit [
 	^compoundUnit consistentWith: self unit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 DerivedUnit >> consistentWithModifiedUnit: modifiedUnit [
 	^modifiedUnit consistentWith: self unit
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 DerivedUnit >> conversionFactor [
 	^unitValue value * unitValue unit conversionFactor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DerivedUnit >> unit [
 	^unitValue unit
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DerivedUnit >> value: myUnitValue [
 	unitValue := myUnitValue
 ]

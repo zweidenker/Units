@@ -2,16 +2,17 @@
 This represents a product of one or more different units.
 "
 Class {
-	#name : #ComplexUnit,
-	#superclass : #CompoundUnit,
+	#name : 'ComplexUnit',
+	#superclass : 'CompoundUnit',
 	#instVars : [
 		'conversionFactor',
 		'cachedBaseUnits'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ComplexUnit class >> units: units exponents: exponents [
 	"if we have just one exponent of size one, the unit itself is enough"
 	(exponents size = 1 and: [exponents first = 1]) ifTrue: [ ^units first ].
@@ -27,7 +28,7 @@ ComplexUnit class >> units: units exponents: exponents [
 		exponents: exponents
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ComplexUnit >> baseUnits [
 	"Since base units are expensive to compute for ComplexUnits, they are cached here."
 	cachedBaseUnits isNil
@@ -35,7 +36,7 @@ ComplexUnit >> baseUnits [
 	^cachedBaseUnits
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ComplexUnit >> calculateBaseUnits [
 	| baseUnits unitDictionary newUnits newExponents scratch |
 	unitDictionary := IdentityDictionary new.
@@ -63,12 +64,12 @@ ComplexUnit >> calculateBaseUnits [
 		exponents: newExponents
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ComplexUnit >> consistentWith: unit [
 	^unit consistentWithComplexUnit: self
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ComplexUnit >> consistentWithBaseUnit: baseUnit [
 	"This might be true, since we may be containing non-base units that reduce
 	 to the base unit."
@@ -76,17 +77,17 @@ ComplexUnit >> consistentWithBaseUnit: baseUnit [
 	^self baseUnits consistentWith: baseUnit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ComplexUnit >> consistentWithComplexUnit: complexUnit [
 	^self baseUnits consistentWith: complexUnit baseUnits
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ComplexUnit >> consistentWithCompoundUnit: compoundUnit [
 	^self baseUnits consistentWith: compoundUnit
 ]
 
-{ #category : #consistency }
+{ #category : 'consistency' }
 ComplexUnit >> consistentWithModifiedUnit: modifiedUnit [
 	"This might be true, since we may be containing non-base units that reduce to the
 	 modified unit."
@@ -95,22 +96,22 @@ ComplexUnit >> consistentWithModifiedUnit: modifiedUnit [
 	^self baseUnits consistentWith: modifiedUnit
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ComplexUnit >> conversionFactor [
 	^conversionFactor
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ComplexUnit >> isComplexUnit [
 	^ true
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 ComplexUnit >> prefixedBy: prefixName [
 	^self error: 'You cannot attach prefixes to complex units.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ComplexUnit >> units: myUnits exponents: myExponents [
 	super units: myUnits exponents: myExponents.
 	conversionFactor := 1.

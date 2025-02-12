@@ -3,8 +3,8 @@ This is a kind of unit with a specific (singular and plural) name, and an abbrev
 
 "
 Class {
-	#name : #NamedUnit,
-	#superclass : #Unit,
+	#name : 'NamedUnit',
+	#superclass : 'Unit',
 	#instVars : [
 		'abbreviation',
 		'name',
@@ -15,10 +15,11 @@ Class {
 		'UnitsByName',
 		'UnitsByPluralName'
 	],
-	#category : #'Units-Core'
+	#category : 'Units-Core',
+	#package : 'Units-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 NamedUnit class >> abbreviation: abbreviation name: unitName pluralName: pluralName [
 	"Create and index a new NamedUnit."
 	| unit |
@@ -32,7 +33,7 @@ NamedUnit class >> abbreviation: abbreviation name: unitName pluralName: pluralN
 	^unit
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 NamedUnit class >> abbreviation: abbreviation name: unitName pluralName: pluralName value: unitValue [
 	^DerivedUnit
 		abbreviation: abbreviation
@@ -41,7 +42,7 @@ NamedUnit class >> abbreviation: abbreviation name: unitName pluralName: pluralN
 		value: unitValue
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 NamedUnit class >> abbreviation: abbreviation
 name: unitName
 pluralName: pluralName
@@ -55,7 +56,7 @@ additiveFactor: additiveFactor [
 		additiveFactor: additiveFactor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeAreaUnits [
 	self
 		abbreviation: 'acre'
@@ -69,7 +70,7 @@ NamedUnit class >> initializeAreaUnits [
 		value: (100 units: Unit metre squared)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeClass [
 	"NamedUnit initializeClass."
 	"Do not rename this to #initialize."
@@ -79,7 +80,7 @@ NamedUnit class >> initializeClass [
 	self initializeUnits
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeForceUnits [
 	self
 		abbreviation: 'N'
@@ -88,7 +89,7 @@ NamedUnit class >> initializeForceUnits [
 		value: (1 units: (Unit kilogram * Unit metre) / Unit second squared)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeLengthUnits [
 	self
 		abbreviation: 'in'
@@ -147,7 +148,7 @@ NamedUnit class >> initializeLengthUnits [
 		value: (1e-10 units: Unit metre)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeMassUnits [
 	"Initialize the mass units."
 	
@@ -178,7 +179,7 @@ NamedUnit class >> initializeMassUnits [
 		value: ((1/1000) units: BaseUnit kilogram).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeOtherUnits [
 
 	self
@@ -196,7 +197,13 @@ NamedUnit class >> initializeOtherUnits [
 		name: 'watt'
 		pluralName: 'watts'
 		value: (1 units: ((Unit ampere) * (Unit volt))).
-		
+	self
+		abbreviation: 'dB'
+		name: 'decibel'
+		pluralName: 'decibels'
+		value: ((10 raisedTo: ((1 - 30) / 10)) units: Unit watt).
+	self flag:'labordep: how to convert this unit to watt because this is not a *?'.
+	
 	DerivedUnit
 		abbreviation: 'deg'
 		name: 'arcdegree'
@@ -204,7 +211,7 @@ NamedUnit class >> initializeOtherUnits [
 		value: (1 degreesToRadians units: Unit radian).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeTemperatureUnits [
 	TemperatureBaseUnit
 		abbreviation: 'K'
@@ -224,7 +231,7 @@ NamedUnit class >> initializeTemperatureUnits [
 		additiveFactor: -273.15
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeTimeUnits [
 	self
 		abbreviation: 'min'
@@ -253,7 +260,7 @@ NamedUnit class >> initializeTimeUnits [
 		value: 1 / (1 units: Unit second)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit class >> initializeUnits [
 
 	self
@@ -266,62 +273,62 @@ NamedUnit class >> initializeUnits [
 		initializeOtherUnits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit class >> withAbbreviation: abbreviation ifAbsent: exceptionBlock [
 	^UnitsByAbbreviation
 		at: abbreviation
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit class >> withPluralName: pluralName ifAbsent: exceptionBlock [
 	^UnitsByPluralName
 		at: pluralName
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit class >> withSingularName: unitName ifAbsent: exceptionBlock [
 	^UnitsByName
 		at: unitName
 		ifAbsent: exceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit >> abbreviation [
 	^abbreviation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 NamedUnit >> abbreviation: myAbbreviation name: myName pluralName: myPluralName [
 	abbreviation := myAbbreviation.
 	name := myName.
 	pluralName := myPluralName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit >> name [
 	^name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 NamedUnit >> pluralName [
 	^pluralName
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 NamedUnit >> printAbbreviationOn: stream [
 	stream nextPutAll: abbreviation
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 NamedUnit >> printFullNameOn: stream pluralized: pluralized [
 	pluralized
 		ifTrue: [stream nextPutAll: pluralName]
 		ifFalse: [stream nextPutAll: name]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 NamedUnit >> storeOn: aStream [
 	"Store the code to lookup the receiver instead of for a new instance."
 	
