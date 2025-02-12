@@ -1,3 +1,6 @@
+[![CI matrix](https://github.com//ZweiDenker/Units/actions/workflows/build.yml/badge.svg)](https://github.com//ZweiDenker/Units/actions/workflows/build.yml)
+
+
 # Units
 
 A simple package for Units management in Pharo.
