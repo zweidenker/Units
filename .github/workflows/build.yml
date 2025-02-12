@@ -11,13 +11,14 @@ on:
     
   push:
     branches:
-      - development
+      - main
   
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
-        pharoversion: [ Pharo64-11, Pharo64-10 ]
+        pharoversion: [ Pharo64-alpha, Pharo64-12, Pharo64-11 ]
     name: ${{ matrix.pharoversion }}
     runs-on: ubuntu-latest
     steps:
